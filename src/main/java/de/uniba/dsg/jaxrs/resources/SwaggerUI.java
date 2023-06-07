@@ -17,13 +17,14 @@ public class SwaggerUI {
     private static final Properties properties = Configuration.loadProperties();
     private static final String SWAGGER_UI_FILES = "META-INF/resources/webjars/swagger-ui/" + properties.getProperty("swaggeruiversion");
     private static final String OPEN_API_FILE_NAME = "openapi.yaml";
+    private static final String SWAGGER_INITIALIZER_FILE_NAME = "swagger-initializer.js";
     private static final Logger logger = Logger.getLogger("SwaggerUI");
 
     @GET
     @Path("swagger-ui/{file}")
     public Response showSwaggerUI(@PathParam("file") final String file) {
         String resourcePath;
-        if (file.equals(OPEN_API_FILE_NAME)) {
+        if (file.equals(OPEN_API_FILE_NAME) ||file.equals(SWAGGER_INITIALIZER_FILE_NAME) ) {
             resourcePath = file;
         } else {
             resourcePath = String.format("%s/%s", SWAGGER_UI_FILES, file);
